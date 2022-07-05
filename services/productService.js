@@ -1,4 +1,5 @@
 const productModel = require('../models/productModel');
+const { schemas, validateSchema } = require('../helpers/validations');
 
 const listAll = async () => {
   const products = await productModel.listAll();
@@ -14,10 +15,12 @@ const getById = async (id) => {
   return product;
 };
 
-const insertProduct = async (name) => {
-  const addInsertProduct = await productModel.insertProduct(name);
+const insertProduct = async (obj) => {
+  const addInsertProduct = await validateSchema(schemas.name, obj);
 
-  return addInsertProduct;
+  const id = await productModel.insertProduct(addInsertProduct);
+
+  return id;
 };
 
 module.exports = {

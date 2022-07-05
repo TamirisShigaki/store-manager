@@ -1,47 +1,41 @@
-const sinon = require('sinon');
-const { expect } = require('chai');
-const productModel = require('../../../models/productModel');
-const { products, product } = require('../../../helpers/productsMock');
-const connection = require('../../../models/connection');
+const sinon = require("sinon");
+const { expect } = require("chai");
+const productModel = require("../../../models/productModel");
+const { products, product } = require("../../../helpers/productsMock");
+const connection = require("../../../models/connection");
 
-discribe('Arquivo Models', () => {
-  
+describe("Arquivo Models", () => {
   after(() => {
     sinon.restore();
   });
 
-  discribe('#listAll', () => {
-    sinon.stub(productModel, 'listAll').resolves(products);
+  describe("#listAll", () => {
+    sinon.stub(productModel, "listAll").resolves(products);
 
-    it('verifica se é possivel retornar um array de produtos', async () => {
+    it("verifica se é possivel retornar um array de produtos", async () => {
       const res = await productModel.listAll();
 
-      expect(res).to.be.an('array');
+      expect(res).to.be.an("array");
 
-      products.forEach((product) => expect(product).to.be.an('object'))
+      products.forEach((product) => expect(product).to.be.an("object"));
     });
 
-    it('verifica se os objetos retornados pelo array possuem id e nome', () => {
+    it("verifica se os objetos retornados pelo array possuem id e nome", async () => {
       const res = await productModel.listAll();
 
-      expect(res).to.have.keys['id', 'name'];
+      expect(res).to.have.keys[("id", "name")];
     });
   });
 
-  discribe('#getById', () => {
-  sinon.stub(connection, 'execute').resolves(product);
+  describe("#getById", () => {
+    sinon.stub(connection, "execute").resolves(product);
 
-  it('verifica se os objetos retornados pelo array possuem id e nome', async () => {
-    const res = await productModel.getById(1);
+    it("verifica se os objetos retornados pelo array possuem id e nome", async () => {
+      const res = await productModel.getById(1);
 
-    expect(res).to.be.an('object');
+      expect(res).to.be.an("object");
 
-    expect(res).to.have.keys[('id', 'name')];
-  })
-})
+      expect(res).to.have.keys[("id", "name")];
+    });
+  });
 });
-
-
-
-
-

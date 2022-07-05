@@ -8,21 +8,19 @@ const listAll = async () => {
 };
 
 const getById = async (id) => {
-    const query = 'SELECT * FROM StoreManager.products WHERE id=?;';
+  const query = 'SELECT * FROM StoreManager.products WHERE id=?;';
 
-    const [products] = await connection.execute(query, [id]);
-    
+  const [products] = await connection.execute(query, [id]);
+
   return products[0];
 };
 
 const insertProduct = async (name) => {
-  const query = 'INSERT INTO * FROM StoreManager.products (name) VALUES (?);';
+  const query = 'INSERT INTO StoreManager.products (name) VALUES (?);';
 
-  await connection.execute(query, [name]);
-
-  return {
-    name,
-  };
+  const [{ insertId }] = await connection.execute(query, [name]);
+  
+  return insertId;
 };
 
 module.exports = {

@@ -6,18 +6,18 @@ module.exports = (err, _req, res, _next) => {
     invalidData: 400,
   };
 
+  console.error(err);
   if (err.isJoi) {
     const status = statusByErrorCode[err.code] || 500;
 
     return res.status(status).json({ message: err.details[0].message });
-  } 
+  }
 
   if (err.code) {
     const status = statusByErrorCode[err.code] || 500;
-        
+
     return res.status(status).json(err);
   }
-  
-  console.error(err);
+
   return res.status(500).json({ message: 'internal server error' });
 };
