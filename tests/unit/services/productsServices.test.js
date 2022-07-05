@@ -35,5 +35,15 @@ describe("Arquivo Services", () => {
 
       expect(res).to.have.keys['id', 'name'];
     });
+ });
+  
+  describe('#insertProduct', () => {
+    it('verifica se retorna id, quando recebe dados validos', async () => {
+      sinon.stub(productModel, "insertProduct").resolves(1);
+
+      const res = await productService.insertProduct({ name: 'ProdutoX' });
+
+      expect(res).to.have.equal(1);
+    });
   });
 });
