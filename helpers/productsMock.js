@@ -9,4 +9,14 @@ const products = [
   },
 ];
 
-module.exports = products;
+const product = [
+  {
+    id: 2,
+    name: 'Traje de encolhimento',
+  },
+];
+
+module.exports = {
+  products,
+  product,
+};

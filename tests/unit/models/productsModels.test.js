@@ -1,20 +1,18 @@
 const sinon = require('sinon');
 const { expect } = require('chai');
 const productModel = require('../../../models/productModel');
-const products = require('../../../helpers/productsMock');
+const { products, product } = require('../../../helpers/productsMock');
+const connection = require('../../../models/connection');
 
 discribe('Arquivo Models', () => {
-  
-  before(() => {
-    sinon.stub(productModel, 'listAll').resolves(products);
-  });
-  
   
   after(() => {
     sinon.restore();
   });
 
-  discribe('listAll', () => {
+  discribe('#listAll', () => {
+    sinon.stub(productModel, 'listAll').resolves(products);
+
     it('verifica se é possivel retornar um array de produtos', async () => {
       const res = await productModel.listAll();
 
@@ -29,7 +27,20 @@ discribe('Arquivo Models', () => {
       expect(res).to.have.keys['id', 'name'];
     });
   });
+
+  discribe('#getById', () => {
+  sinon.stub(connection, 'execute').resolves(product);
+
+  it('verifica se os objetos retornados pelo array possuem id e nome', async () => {
+    const res = await productModel.getById(1);
+
+    expect(res).to.be.an('object');
+
+    expect(res).to.have.keys[('id', 'name')];
+  })
+})
 });
+
 
 
 

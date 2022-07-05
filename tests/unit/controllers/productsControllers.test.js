@@ -2,7 +2,7 @@ const sinon = require('sinon');
 const { expect } = require('chai');
 const productService = require('../../../services/productService');
 const productController = require('../../../controllers/productController');
-const products = require('../../../helpers/productsMock');
+const { products, product } = require('../../../helpers/productsMock');
 
 discribe('Arquivo Controller', () => {
   const res = {};
@@ -19,7 +19,7 @@ discribe('Arquivo Controller', () => {
     sinon.restore();
   });
 
-  discribe('listAll', () => {
+  discribe('#listAll', () => {
     it('verifica se retorna o status 200', async () => {
       await productController.listAll(req, res);
 
@@ -40,6 +40,25 @@ discribe('Arquivo Controller', () => {
 
     it('verifica se os objetos retornados pelo array possuem id e nome', () => {
       await productController.listAll(req, res);
+
+      expect(res.json).to.have.keys[('id', 'name')];
+    });
+  });
+
+  discribe('#getById', () => {
+
+    before(() => {
+      req.params = { id: 1 }
+    });
+
+    it('verifica se retorna o status 200', async () => {
+      await productController.getById(req, res);
+
+      expect(res.status.calledWith(200)).to.be.equal(true);
+    });
+
+    it('verifica se retorna um json com um array de objetos e se possui id e name', async () => {
+      await productController.getById(req, res);
 
       expect(res.json).to.have.keys[('id', 'name')];
     });
