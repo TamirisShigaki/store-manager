@@ -1,4 +1,5 @@
 const rescue = require('express-rescue');
+const Joi = require('joi');
 const productService = require('../services/productService');
 
 const listAll = async (_req, res) => {
@@ -17,7 +18,23 @@ const getById = rescue(async (req, res) => {
   return res.status(200).json(product);
 });
 
+const insertProduct = rescue(async (req, res, next) => {
+  const { error } = Joi.object({
+    name: Joi.string().not().empty().min(5)
+    .required(),
+  }).validate(req.body);
+
+  if (error) return next(error);
+
+  const { name } = req.body;
+
+  const addInsertProduct = await productService.insertProduct(name);
+
+  return res.status(201).json(addInsertProduct);
+});
+
 module.exports = {
   listAll,
   getById,
+  insertProduct,
 };
