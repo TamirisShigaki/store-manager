@@ -1,37 +1,37 @@
-const sinon = require("sinon");
-const productService = require("../../../services/productService");
-const productModel = require("../../../models/productModel");
-const { expect, use } = require("chai");
-const chaiAsPromised = require("chai-as-promised");
-const { products, product } = require("../../../helpers/productsMock");
+const sinon = require('sinon');
+const productService = require('../../../services/productService');
+const productModel = require('../../../models/productModel');
+const { expect, use } = require('chai');
+const chaiAsPromised = require('chai-as-promised');
+const { products, product } = require('../../../helpers/productsMock');
 
 use(chaiAsPromised);
 
-describe("Arquivo Services", () => {
+describe('Arquivo Services', () => {
   after(() => {
     sinon.restore();
   });
 
-  describe("#listAll", () => {
-    it("verifica se é possível retornar um array de objetos se houver produtos", async () => {
-      sinon.stub(productModel, "listAll").resolves(products);
+  describe('#listAll', () => {
+    it('verifica se é possível retornar um array de objetos se houver produtos', async () => {
+      sinon.stub(productModel, 'listAll').resolves(products);
 
       const res = await productService.listAll();
 
-      expect(res).to.be.an("array");
+      expect(res).to.be.an('array');
 
-      products.forEach((product) => expect(product).to.be.an("object"));
+      products.forEach((product) => expect(product).to.be.an('object'));
     });
   });
   
 
  describe('#getById', () => {
     it('verifica se os objetos retornados pelo array possuem id e nome', async () => {
-      sinon.stub(productModel, "getById").resolves(product);
+      sinon.stub(productModel, 'getById').resolves(product);
 
       const res = await productService.getById(1);
 
-      products.forEach((product) => expect(product).to.be.an("object"));
+      products.forEach((product) => expect(product).to.be.an('object'));
 
       expect(res).to.have.keys['id', 'name'];
     });
@@ -39,7 +39,7 @@ describe("Arquivo Services", () => {
   
   describe('#insertProduct', () => {
     it('verifica se retorna id, quando recebe dados validos', async () => {
-      sinon.stub(productModel, "insertProduct").resolves(1);
+      sinon.stub(productModel, 'insertProduct').resolves(1);
 
       const res = await productService.insertProduct({ name: 'ProdutoX' });
 

@@ -1,8 +1,8 @@
-const sinon = require("sinon");
-const { expect } = require("chai");
-const productService = require("../../../services/productService");
-const productController = require("../../../controllers/productController");
-const { products, product } = require("../../../helpers/productsMock");
+const sinon = require('sinon');
+const { expect } = require('chai');
+const productService = require('../../../services/productService');
+const productController = require('../../../controllers/productController');
+const { products, product } = require('../../../helpers/productsMock');
 
 describe('Arquivo Controller', () => {
   const res = {};
@@ -19,7 +19,7 @@ describe('Arquivo Controller', () => {
 
   describe('#listAll', () => {
     before(() => {
-      sinon.stub(productService, "listAll").resolves(products);
+      sinon.stub(productService, 'listAll').resolves(products);
     });
 
     it('verifica se retorna o status 200', async () => {
@@ -34,46 +34,46 @@ describe('Arquivo Controller', () => {
       products.forEach((product) => expect(product).to.be.an('object'));
     });
 
-    it("verifica se os objetos retornados pelo array possuem id e nome", async () => {
+    it('verifica se os objetos retornados pelo array possuem id e nome', async () => {
       await productController.listAll(req, res);
 
-      expect(res.json).to.have.keys[("id", "name")];
+      expect(res.json).to.have.keys[('id', 'name')];
     });
   });
 
   describe('#getById', () => {
-    beforeEach(() => {
+    before(() => {
       req.params = {id: 1}
     });
 
-    it("verifica se retorna o status 200", async () => {
+    it('verifica se retorna o status 200', async () => {
       await productController.getById(req, res);
 
       expect(res.status.calledWith(200)).to.be.equal(true);
     });
 
-    it("verifica se retorna um json com um array de objetos e se possui id e name", async () => {
+    it('verifica se retorna um json com um array de objetos e se possui id e name', async () => {
       await productController.getById(req, res);
 
-      expect(res.json).to.have.keys[("id", "name")];
+      expect(res.json).to.have.keys[('id', 'name')];
     });
   });
 
-  describe("#insertProduct", () => {
-    beforeEach(() => {
+  describe('#insertProduct', () => {
+    before(() => {
       req.body = { name: 'ProdutoY' };
     });
 
-    it("verifica se chama o método status 201", async () => {
+    it('verifica se chama o método status 201', async () => {
       await productController.insertProduct(req, res);
 
       expect(res.status.calledWith(201)).to.be.equal(true);
     });
 
-    it("verifica se retorna um json com um array de objetos e se possui id e name", async () => {
+    it('verifica se retorna um json com um array de objetos e se possui id e name', async () => {
       await productController.insertProduct(req, res);
 
-      expect(res.json).to.have.keys[("id", "name")];
+      expect(res.json).to.have.keys[('id', 'name')];
     });
   });
 });

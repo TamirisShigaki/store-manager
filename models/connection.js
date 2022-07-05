@@ -1,5 +1,4 @@
-require('dotenv').config(); // não se esqueça de configurar suas variáveis de ambiente aqui na configuração
-
+require('dotenv').config();
 const myslq = require('mysql2/promise');
 
 const connection = myslq.createPool({
