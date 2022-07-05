@@ -3,7 +3,6 @@ const { expect } = require("chai");
 const productModel = require("../../../models/productModel");
 const { products, product } = require("../../../helpers/productsMock");
 const connection = require("../../../models/connection");
-
 describe("Arquivo Models", () => {
   after(() => {
     sinon.restore();
@@ -38,4 +37,14 @@ describe("Arquivo Models", () => {
       expect(res).to.have.keys[("id", "name")];
     });
   });
+
+  describe("#insertProduct", () => {
+    it('verifica se retorna um id', async () => {
+      sinon.stub(connection, "execute").resolves([{ insertId: 1 }]);
+
+      const res = await productModel.insertProduct({ name: 'ProdutoX' });
+
+      expect(res).to.be.equal(1);
+    });
+  })
 });

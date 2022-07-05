@@ -4,7 +4,6 @@ const schemas = {
   name: Joi.object({
     name: Joi.string().min(5).required(),
   }),
-  
 };
 
 const validateSchema = (schema, dataToValidate) => {
