@@ -34,8 +34,26 @@ const insertProduct = rescue(async (req, res, next) => {
   return res.status(201).json({ id, name });
 });
 
+const update = async (req, res, next) => {
+  const { error } = Joi.object({
+    name: Joi.string().required().min(5).not(),
+  }).validate(req.body);
+
+  if (error) return next(error);
+
+  const { name } = req.body;
+  const { id } = req.params;
+
+  const upProduct = await productService.update(name, id);
+
+  if (upProduct.error) return next(upProduct.error);
+  
+  return res.status(200).json(upProduct);
+};
+
 module.exports = {
   listAll,
   getById,
   insertProduct,
+  update,
 };

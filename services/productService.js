@@ -20,8 +20,18 @@ const insertProduct = async (name) => {
   return id;
 };
 
+const update = async (name, id) => {
+  const validateId = await getById(id);
+  if (validateId.error) return validateId;
+
+  const data = await productModel.update(name, id);
+  
+  return data;
+};
+
 module.exports = {
   listAll,
   getById,
   insertProduct,
+  update,
 };

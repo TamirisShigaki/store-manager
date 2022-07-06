@@ -62,7 +62,19 @@ describe('Arquivo Controller', () => {
   // describe('#insertProduct', () => {
   //   before(() => {
   //     req.body = { name: 'ProdutoY' };
+
+  //     res.status = sinon.stub().returns(res);
+  //     res.json = sinon.stub();
+
+  //     sinon.stub(productController, 'insertProduct').resolves({
+  //       id: 4,
+  //       name: 'ProdutoY'
+  //     })
   //   });
+
+  //   after(() => {
+  //     productController.insertProduct.restore();
+  //   })
 
   //   it('verifica se chama o método status 201', async () => {
   //     await productController.insertProduct(req, res);
@@ -70,10 +82,11 @@ describe('Arquivo Controller', () => {
   //     expect(res.status.calledWith(201)).to.be.equal(true);
   //   });
 
-  //   it('verifica se retorna um json com um array de objetos e se possui id e name', async () => {
+  //   it('verifica se retorna um json passando um objeto', async () => {
   //     await productController.insertProduct(req, res);
 
-  //     expect(res.json).to.have.keys[('id', 'name')];
+  //     expect(res.json.calledWith(sinon.match.object)).to.be.equal(true);
   //   });
   // });
 });
+
