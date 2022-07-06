@@ -1,18 +1,14 @@
-const Joi = require('joi');
+// const Joi = require('joi');
 
-const schemas = {
-  name: Joi.object({
-    name: Joi.string().min(5).required(),
-  }),
-};
+// const schemas = (name) => {
+//   const error = Joi.object({
+//     name: Joi.string().min(5).required(),
+//   }).validate(name);
 
-const validateSchema = (schema, dataToValidate) => {
-  const { error, value } = schema.validate(dataToValidate);
-  if (error) throw error;
-  return value;
-};
+//   if (error.error) return error;
+//   return name;
+// };
 
-module.exports = {
-  validateSchema,
-  schemas,
-};
+// module.exports = {
+//   schemas,
+// };
