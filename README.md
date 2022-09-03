@@ -1,4 +1,10 @@
-# 🚧 README em construção 🚧
+# 🚧 Readme em construção 🚧
+
+## 26 – Projeto Store Manager
+
+## Contexto
+
+Projeto pessoal desenvolvido na Trybe, onde tive que criar uma API RESTful usando a arquitetura MSC (Model-Service-Controller) e implementar testes unitários com Mocha, Chai e Sinon
 
 <!-- Olá, Tryber!
 
